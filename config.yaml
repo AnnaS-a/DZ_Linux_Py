@@ -6,4 +6,4 @@ folderbad: /home/user/folder2
 count: 5
 bs: 1K
 extension: 7z
-#extension: tar
+#extension: tar (в тестах надо изменять флаги для команд)

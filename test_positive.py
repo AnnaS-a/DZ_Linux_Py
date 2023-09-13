@@ -77,16 +77,7 @@ class TestPositive:
         res1 = checkout(f'cd {data["folderout"]}; 7z h arx2.{data["extension"]}', hash_crc32.upper())
         res2 = checkout(f'cd {data["folderout"]}; 7z h arx2.{data["extension"]}', hash_crc32.lower())
         assert res1 or res2, "NO equal hash"
-        # assert checkout(f'cd {data["folderout"]}; crc32 {data["folderout"]}/test1.txt', "cbf53a1c")
-
-
-    # def test_step10(self):
-    #     #test10
-    #     res1 = checkout(f'cd {data["folderin"]}; 7z h test1.txt', "Everything is Ok")
-    #     hash = getout(f'cd {data["folderin"]}; crc32 test1.txt').upper()
-    #     res2 = checkout(f'cd {data["folderin"]}; 7z h test1.txt', hash)
-    #     assert res1 and res2, "test10 FAIL"
-    #     # assert checkout(f'cd {data["folderout"]}; crc32 {data["folderout"]}/test1.txt', "cbf53a1c")
+        
 
 if __name__ == "__main__":
     pytest.main(["-v"])

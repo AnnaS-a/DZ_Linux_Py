@@ -1,19 +1,26 @@
-from checkers import ssh_checkout
-from load import upload_file
+import paramiko
 
 
-def deploy():
-    res = []
-    upload_file('0.0.0.0', 'user2', '11', '/home/user/p7zip-full.deb', '/home/user2/p7zip-full.deb')
-    res.append(ssh_checkout('0.0.0.0', 'user2', '11', 'echo' "11" | 'sudo -S dpkg -i /home/user2/p7zip-full.deb',
-                            'Настраивается пакет'))
-    res.append(ssh_checkout('0.0.0.0', 'user2', '11', 'echo' "11"
-                            | 'sudo -S dpkg -s p7zip-full.deb', 'Status: install ok installed'))
-    return all(res)
+def upload_file(host, user, passwd, local_path, remote_path, port=22):
+    print(f"Upload file {local_path} in {remote_path}")
+    transport = paramiko.Transport((host, port))
+    transport.connect(None, username=user, password=passwd)
+    sftp = paramiko.SFTPClient.from_transport(transport)
+    sftp.put(local_path, remote_path)
+    if sftp:
+        sftp.close()
+    if transport:
+        transport.close()
 
 
-if deploy():
-    print('success')
-else:
-    print('false')
-    
+def download_file(host, user, passwd, local_path, remote_path, port=22):
+    print(f"Download file {remote_path} in {local_path}")
+    transport = paramiko.Transport((host, port))
+    transport.connect(None, username=user, password=passwd)
+    sftp = paramiko.SFTPClient.from_transport(transport)
+    sftp.get(remote_path, local_path)
+    if sftp:
+        sftp.close()
+    if transport:
+        transport.close()
+

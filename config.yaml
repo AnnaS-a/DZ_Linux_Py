@@ -1,9 +1,16 @@
-folderin: /home/user/tst
-folderout: /home/user/out
-folderext: /home/user/folder1
-folderext3: /home/user/folder3
-folderbad: /home/user/folder2
+folder_tst: /home/user/tst
+folder_in: /home/user2/tst/file
+folder_out: /home/user2/tst/out
+folder_ext: /home/user2/tst/ext
+folder_ext2: /home/user2/tst/ext2
+folder_badarx: /home/user2/tst/badarx
 count: 5
-bs: 1K
-extension: 7z
-#extension: tar (в тестах надо изменять флаги для команд)
+size_of_file: 1
+name_of_arch: '*.7z'
+path_journal: /home/user/journal.txt
+host: 0.0.0.0
+user: user2
+password: "11"
+local_path: /home/user/p7zip-full.deb
+remote_path: /home/user2/p7zip-full.deb
+pkgname: p7zip-full

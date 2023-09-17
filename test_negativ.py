@@ -1,29 +1,16 @@
+from checkers import ssh_checkout_negative
 import yaml
-import pytest
-from checkers import checkout_negative
+from conftest import data
 
 
-with open('config.yaml', encoding='utf-8') as f:
-    data = yaml.safe_load(f)
+def test_step8():
+    # test1
+    assert ssh_checkout_negative(data["host"], data["user"], data["password"],
+                                 "cd {}; 7z e badarx.7z -o{} -y".format(data['folder_out'], data['folder_ext']),
+                                 "ERROR"), "Test8 Fail"
 
 
-# Задание 3
-# Создать отдельный файл для негативных тестов. Функцию
-# проверки вынести в отдельную библиотеку. Повредить архив
-# (например, отредактировав его в текстовом редакторе).
-# Написать негативные тесты работы архиватора с командами
-# распаковки (e) и проверки (t) поврежденного архива.
-
-
-class TestNegative:
-    def test_step1(self, make_folders, create_bad_archive, after_step):
-        # test2
-        assert checkout_negative(f'cd {data["folderbad"]}; 7z e {data["folderbad"]}/arx2.{data["extension"]} -o{data["folderext"]} -y', "ERRORS"), "test1 FAIL"
-
-    def test_step2(self, make_folders, create_bad_archive, after_step):
-        # test2
-        assert checkout_negative(f'cd {data["folderbad"]}; 7z t arx2.{data["extension"]}', "Is not"), "test2 FAIL"
-
-
-if __name__ == "__main__":
-    pytest.main(["-v"])
+def test_step9():
+    # test2
+    assert ssh_checkout_negative(data["host"], data["user"], data["password"],
+                                 "cd {}; 7z t badarx.7z".format(data['folder_out']), "ERROR"), "Test9 Fail"
